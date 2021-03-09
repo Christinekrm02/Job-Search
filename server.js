@@ -6,24 +6,22 @@ USER = require("./models/User");
 const port = 3001;
 
 connectDB();
-
+app.use(express.json());
 //HOME
 app.get("/", (req, res) => {
   res.send("Homepage");
 });
-//USER REGISTER
-app.post("/register", (req, res) => {
-  try {
-    //
-  } catch (e) {
-    res.json({
-      msg: "Account with this infomration already exists",
-    });
-  }
-});
+
+//EXPRESS MIDDLEWARE ALLOWS YOU TO PROTECT AUTH ROUTES
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//PUBLIC ROUTES
+const publicRoutes = require("./routes/public-routes");
+app.use("/user", publicRoutes);
 
 app.get("/test", (req, res) => {
-  res.send("Hi there!");
+  res.send("You've hit this route");
 });
 
 app.listen(port, () => {

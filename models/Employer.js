@@ -1,11 +1,11 @@
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-  username: {
+const employerSchema = new mongoose.Schema({
+  employer: {
     type: String,
     unique: true,
-    required: [true, "Username may not be left blank"],
+    required: [true, "Place of employment may not be left blank"],
     match: [/\S+@\S+\.\S+/, "is invalid"],
     index: true,
     lowercase: true,
@@ -27,36 +27,32 @@ const userSchema = new mongoose.Schema({
     select: false,
     required: [true, "Password required"],
   },
-  /*bio: {
-    required: true,
-    type: String,
-  },*/
 });
 
 //1 HASH PASSWORD USING PRE MIDDLEWARE
 //DO NOT USE ARROW FUNCTION BECAUSE WE NEED TO USE THIS KEYWORD
-userSchema.pre("save", function (next) {
-  const user = this;
+employerSchema.pre("save", function (next) {
+  const employer = this;
 
   //CHECK IF PASSWORD HAS BEEN MODIFIED/DOES NOT MATCH ORIGINAL
-  if (!user.isModified("password")) return next;
+  if (!employer.isModified("password")) return next;
   //GENERATE SALT TO HASH PASSWORD
   bcrypt.genSalt(10, function (error, salt) {
     if (error) throw next(error);
     //HASH PASSWORD TOGETHER WITH SALT
-    bcrypt.hash(user.password, salt, function (error, hash) {
+    bcrypt.hash(employer.password, salt, function (error, hash) {
       if (error) throw next(error);
-      user.password = hash;
+      employer.password = hash;
       next();
     });
   });
 });
 
-//2 COMPARE HASHED PASSWORD TO USER INPUT
-userSchema.methods.comparePassword = function (userPassword, cb) {
-  bcrypt.compare(userPassword, this.password, function (err, isMatch) {
+//2 COMPARE HASHED PASSWORD TO INPUT
+employerSchema.methods.comparePassword = function (employerPassword, cb) {
+  bcrypt.compare(employerPassword, this.password, function (err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
   });
 };
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Employer", employerSchema);
