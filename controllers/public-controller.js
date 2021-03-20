@@ -1,4 +1,5 @@
 const User = require("../models/User");
+//USER SIGNS UP
 exports.postRegisterUser = async (req, res) => {
   console.log(req.body);
   try {

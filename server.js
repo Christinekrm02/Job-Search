@@ -20,10 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 const publicRoutes = require("./routes/public-routes");
 app.use("/user", publicRoutes);
 
-app.get("/test", (req, res) => {
-  res.send("You've hit this route");
-});
-
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
