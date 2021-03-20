@@ -1,9 +1,10 @@
 const User = require("../models/User");
 exports.postRegisterUser = async (req, res) => {
-  console.log("request made on register route");
+  console.log(req.body);
   try {
     //CHECK IF USER ALREADY EXISTS
     const user = await User.findOne({ username: req.body.username });
+    console.log(req.body.username);
     if (user)
       res.json({
         msg:
@@ -22,6 +23,7 @@ exports.postRegisterUser = async (req, res) => {
       });
     }
   } catch (e) {
+    console.log(e);
     res.json({
       msg: e.Message,
     });

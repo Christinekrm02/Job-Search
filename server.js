@@ -6,7 +6,7 @@ USER = require("./models/User");
 const port = 3001;
 
 connectDB();
-app.use(express.json());
+
 //HOME
 app.get("/", (req, res) => {
   res.send("Homepage");

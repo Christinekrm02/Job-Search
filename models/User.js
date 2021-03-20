@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: [true, "Username may not be left blank"],
-    match: [/\S+@\S+\.\S+/, "is invalid"],
+
     index: true,
     lowercase: true,
   },
