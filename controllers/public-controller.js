@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 //JOB SEEKER USER SIGNS UP
 exports.postRegisterUser = async (req, res) => {
- // console.log(req.body);
+  console.log(req.body);
   try {
     //CHECK IF USER ALREADY EXISTS
     const user = await User.findOne({ username: req.body.username });
@@ -14,7 +14,7 @@ exports.postRegisterUser = async (req, res) => {
     if (user)
       res.json({
         msg:
-          "A user with this infomration exists already, please proceed to login",
+          "A user with this information exists already, please proceed to login",
       });
     else {
       console.log("User created");
@@ -75,13 +75,14 @@ exports.postRegisterEmployer = async (req, res) => {
 
 //USER LOGIN
 exports.postLoginUser = async (req, res) => {
+  console.log(req.body);
   try {
     //EXPOSE USER PASSWORD TO COMPARE TO USER PASSWORD IN DB
     //
-    const user = await User.findOne({ username: req.body.username }).select(
+    const user = await User.findOne({ email: req.body.email }).select(
       "+password"
     );
-
+    console.log(user);
     if (user) {
       //CHECK IF USER'S ENTERED PASSWORD MATCHES AGAINST PASSWORD STORED IN DB
       const checkPasswordMatch = await bcrypt.compare(

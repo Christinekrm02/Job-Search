@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "package-install": "npm install concurrently -D && express mongoose jsonwebtoken bcryptjs dotenv jwt-decode",
     "start": "node server.js",
     "server": "nodemon server.js",
+    "package-install": "npm install concurrently -D && express mongoose jsonwebtoken bcryptjs dotenv jwt-decode",
     "client": "cd client && npm run start",
-    "react-install": "nvm use 14 && npx create-react-app client --use-npm",
+    "create client": "nvm use 14 && npx create-react-app client --use-npm",
+    "react install": "cd client && npm install axios bootstrap react-bootstrap react-router-dom",
     "mongo": "brew services run mongodb-community",
     "dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\""
   },
