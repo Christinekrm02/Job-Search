@@ -6,7 +6,7 @@ const jobPostSchema = new mongoose.Schema(
       require: ["Please enter job posting", true],
       trim: true,
     },
-    user: {
+    employer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Employer",
       require: true,
@@ -15,4 +15,4 @@ const jobPostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports("Post", jobPostSchema);
+module.exports = mongoose.model("Post", jobPostSchema);
