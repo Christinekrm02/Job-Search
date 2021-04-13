@@ -8,6 +8,7 @@ import AppContext from "../context/AppContext";
 import API from "../utils/API";
 
 export default function LoginForm() {
+  // eslint-disable-next-line no-unused-vars
   const { user, setUser } = useContext(AppContext);
   const [login, setLogin] = useState({
     username: "",
