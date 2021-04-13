@@ -9,6 +9,7 @@ import SignUpForm from "./components/SignUpForm";
 import Home from "./components/Home";
 import NavigationComponent from "./components/NavigationBar";
 import UserProfile from "./components/UserProfile";
+import NoMatch404Error from "./components/NoMatch404Error";
 
 function App() {
   const [user, setUser] = useState({});
@@ -19,9 +20,10 @@ function App() {
         <Switch>
           <AppContext.Provider value={{ user, setUser }}>
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={LoginForm} />
+            <Route path="/login" component={LoginForm} />
             <Route path="/signup" component={SignUpForm} />
-            <Route path="/profile/:slug" component={UserProfile} />
+            <Route exact path="/profile/:slug" component={UserProfile} />
+            <Route path="/not-found" component={NoMatch404Error} />
           </AppContext.Provider>
         </Switch>
       </Router>
