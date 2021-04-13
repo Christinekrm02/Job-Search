@@ -1,0 +1,11 @@
+.error404-wrapper {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  width: 30%;
+  height: 500px;
+}
+p {
+  margin-top: 20px;
+}
